@@ -16,9 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Import Routes
-app.get('/', (req, res) => {
-  res.send('Does this work?');
-});
+app.use('/api/posts', require('./routes/postRoutes'));
 
 // Error handling
 app.use(errorHandler);
