@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv').config();
 const colors = require('colors');
 const connectDB = require('./config/db');
+const { errorHandler } = require('./middleware/errorMiddleware');
 const port = process.env.PORT || 3000;
 
 // connect to MongoDB
@@ -16,11 +17,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // Import Routes
 app.get('/', (req, res) => {
-  res.send('Hello World');
+  res.send('Does this work?');
 });
 
 // Error handling
-
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`.bgBlack.magenta);
