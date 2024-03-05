@@ -9,9 +9,9 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 // Login a user
-const loginUser = async (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
   res.send("Login user");
-};
+});
 
 // Get user profile
 const getUserProfile = asyncHandler(async (req, res) => {
@@ -19,9 +19,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
 });
 
 // Update user profile
-const updateUserProfile = async (req, res) => {
+const updateUserProfile = asyncHandler(async (req, res) => {
   res.send("Update user profile");
-};
+});
 
 // exports
 module.exports = {
