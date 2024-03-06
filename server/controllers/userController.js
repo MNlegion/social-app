@@ -11,8 +11,8 @@ const registerUser = asyncHandler(async (req, res) => {
   const existingUser = await User.findOne({ email });
 
   if (existingUser) {
-      res.status(400);
-      throw new Error("User already exists");
+    res.status(400);
+    throw new Error("User already exists");
   }
 
   // Hash the password
@@ -21,35 +21,50 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // If the user doesn't exist, create a new User
   const user = await User.create({
-      username,
-      email,
-      password: hashedPassword,
+    username,
+    email,
+    password: hashedPassword,
   });
 
   if (user) {
-      res.status(201).json({
-          _id: user._id,
-          username: user.username,
-          email: user.email,
-          token: generateToken(user._id),
-      });
+    res.status(201).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      token: generateToken(user._id),
+    });
   } else {
-      res.status(400);
-      throw new Error("Invalid user data");
+    res.status(400);
+    throw new Error("Invalid user data");
   }
 });
 
 // Helper function to generate JWT token
 const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, {
-      expiresIn: "30d",
+    expiresIn: "30d",
   });
 };
 
-
 // Login a user
 const loginUser = asyncHandler(async (req, res) => {
-  res.send("Login user");
+  const { email, password } = req.body;
+
+  // Find the user by email
+  const user = await User.findOne({ email });
+
+  if (user && (await bcrypt.compare(password, user.password))) {
+    // If the email and password match, generate a JWT token
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(401);
+    throw new Error("Invalid email or password");
+  }
 });
 
 // Get user profile
