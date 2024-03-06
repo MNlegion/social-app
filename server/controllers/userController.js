@@ -39,13 +39,6 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-// Helper function to generate JWT token
-const generateToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
-  });
-};
-
 // Login a user
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -76,6 +69,13 @@ const getUserProfile = asyncHandler(async (req, res) => {
 const updateUserProfile = asyncHandler(async (req, res) => {
   res.send("Update user profile");
 });
+
+// Helper function to generate JWT token
+const generateToken = (userId) => {
+  return jwt.sign({ userId }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+};
 
 // exports
 module.exports = {
