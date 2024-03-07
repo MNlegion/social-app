@@ -62,7 +62,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 // Get user profile
 const getUserProfile = asyncHandler(async (req, res) => {
-  res.send("Get user profile");
+  res.status(200).json(req.user);
 });
 
 // Update user profile
