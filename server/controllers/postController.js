@@ -64,7 +64,16 @@ const updatePost = async (req, res) => {
   res.status(200).json(updatedPost);
 };
 
-const deletePost = async (req, res) => {};
+const deletePost = async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  if (post) {
+    await post.deleteOne();
+    res.status(200).json({ id: req.params.id });
+  } else {
+    res.status(404);
+    throw new Error("Post not found");
+  }
+};
 
 // exports
 module.exports = {
