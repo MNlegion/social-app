@@ -26,9 +26,7 @@ const createPost = async (req, res) => {
   res.status(201).json(post);
 };
 
-const getSinglePost = async (req, res) => {
-  
-};
+const getSinglePost = async (req, res) => {};
 
 const updatePost = async (req, res) => {
   const post = await Post.findById(req.params.id);
@@ -40,15 +38,15 @@ const updatePost = async (req, res) => {
   }
 
   // check if the user exists
-  if(!user) {
+  if (!user) {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 
   // check if the user is the owner of the post
-  if(post.user.toString() !== req.user._id.toString()) {
+  if (post.user.toString() !== req.user._id.toString()) {
     res.status(401);
-    throw new Error('You are not authorized to perform this action');
+    throw new Error("You are not authorized to perform this action");
   }
 
   // update the post
