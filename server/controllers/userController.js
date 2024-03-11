@@ -94,6 +94,18 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   res.status(200).json(req.user);
 });
 
+// Get User Friends
+const getUserFriends = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).populate("friends");
+
+  if (user) {
+    res.status(200).json(user.friends);
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
 // Helper function to generate JWT token
 const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, {
@@ -107,4 +119,5 @@ module.exports = {
   loginUser,
   getUserProfile,
   updateUserProfile,
+  getUserFriends,
 };
