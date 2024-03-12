@@ -1,8 +1,8 @@
-const express = require('express');
-const dotenv = require('dotenv').config();
-const colors = require('colors');
-const connectDB = require('./config/db');
-const { errorHandler } = require('./middleware/errorMiddleware');
+const express = require("express");
+const dotenv = require("dotenv").config();
+const colors = require("colors");
+const connectDB = require("./config/db");
+const { errorHandler } = require("./middleware/errorMiddleware");
 const port = process.env.PORT || 3000;
 
 // connect to MongoDB
@@ -16,8 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Import Routes
-app.use('/api/posts', require('./routes/postRoutes'));
-app.use('/api/users', require('./routes/userRoutes'));
+app.use("/api/posts", require("./routes/postRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 
 // Error handling
 app.use(errorHandler);
