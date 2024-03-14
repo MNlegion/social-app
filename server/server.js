@@ -21,6 +21,7 @@ app.use("/api/posts", require("./routes/postRoutes"));
 app.use("/api/comments", require("./routes/commentRoutes"));
 app.use("/api/follow", require("./routes/followRoutes"));
 app.use("/api/likes", require("./routes/likeRoutes"));
+app.use("/api/notifications", require("./routes/notificationRoutes"));
 
 // Error handling
 app.use(errorHandler);
