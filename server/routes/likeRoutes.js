@@ -6,7 +6,7 @@ const {
 } = require('../controllers/likeController');
 
 // routes
-router.route('/like').post(likePost);
+router.route('/').post(likePost);
 router.route('/unlike').post(unlikePost);
 
 // export the router

@@ -11,7 +11,7 @@ const getSingleNotification = async (req, res) => {
 };
 
 // Update notification
-const updateNotification = async (req, res) => {
+const markAsRead = async (req, res) => {
   res.send("Update notification");
 };
 
@@ -23,6 +23,6 @@ const deleteNotification = async (req, res) => {
 module.exports = {
   getNotifications,
   getSingleNotification,
-  updateNotification,
+  markAsRead,
   deleteNotification,
 };
