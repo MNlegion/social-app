@@ -37,34 +37,28 @@ const userSchema = new mongoose.Schema(
       required: false,
     },
     followers: {
-      type: Array,
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
       default: [],
-      required: false,
     },
     following: {
-      type: Array,
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
       default: [],
-      required: false,
     },
     posts: {
-      type: Array,
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
       default: [],
-      required: false,
     },
     savedPosts: {
-      type: Array,
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
       default: [],
-      required: false,
     },
     notifications: {
-      type: Array,
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notification' }],
       default: [],
-      required: false,
     },
     messages: {
-      type: Array,
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
       default: [],
-      required: false,
     },
   },
   {
