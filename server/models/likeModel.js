@@ -1,19 +1,21 @@
 const mongoose = require("mongoose");
 
 const likeSchema = new mongoose.Schema(
-    {
-        user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-        },
-        post: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Post",
-        required: true,
-        },
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    { timestamps: true }
+    post: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+      required: true,
+    },
+  },
+  { timestamps: true,
+    versionKey: false,
+    collection: "likes"}
 );
 
 module.exports = mongoose.model("Like", likeSchema);
