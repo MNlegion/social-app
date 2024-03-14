@@ -10,7 +10,19 @@ const unfollowUser = async (req, res) => {
     res.send('Unfollow a user');
 }
 
+// Get all followers
+const getFollowers = async (req, res) => {
+    res.send('Get all followers');
+}
+
+// Get all following
+const getFollowing = async (req, res) => {
+    res.send('Get all following');
+}
+
 module.exports = {
     followUser,
-    unfollowUser
+    unfollowUser,
+    getFollowers,
+    getFollowing
 };
