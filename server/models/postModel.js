@@ -14,12 +14,29 @@ const postSchema = new mongoose.Schema(
       trim: true,
       maxlength: 2000,
     },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     likes: {
-      type: Array,
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+      default: [],
+    },
+    comments: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+      default: [],
+    },
+    tags: {
+      type: [String],
       default: [],
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    versionKey: false,
+    collection: "posts",
+  }
 );
 
 module.exports = mongoose.model("Post", postSchema);
