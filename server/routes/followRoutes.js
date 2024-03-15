@@ -8,10 +8,10 @@ const {
 } = require("../controllers/followController");
 
 // routes
-router.route("/follow").post(followUser);
-router.route("/unfollow").post(unfollowUser);
-router.route("/followers").get(getFollowers);
-router.route("/following").get(getFollowing);
+router.post("/follow", followUser);
+router.post("/unfollow", unfollowUser);
+router.get("/followers", getFollowers);
+router.get("/following", getFollowing);
 
 // export the router
 module.exports = router;
