@@ -2,13 +2,12 @@ const Post = require("../models/postModel");
 const User = require("../models/userModel");
 
 const getPosts = async (req, res) => {
-  // try {
-  //   const posts = await Post.find({});
-  //   res.status(200).json(posts);
-  //   console.log(posts);
-  // } catch (error) {
-  //   res.status(500).json({ message: "Server Error" });
-  // }
+  try {
+    const posts = await Post.find();
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 const createPost = async (req, res) => {
@@ -29,37 +28,34 @@ const createPost = async (req, res) => {
 const getSinglePost = async (req, res) => {};
 
 const updatePost = async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  if (post) {
-    res.status(200).json(post);
-  } else {
-    res.status(404);
-    throw new Error("Post not found");
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      res.status(404);
+      throw new Error("Post not found");
+    }
+
+    // Check if the authenticated user is the owner of the post
+    if (post.user.toString() !== req.user._id.toString()) {
+      res.status(401);
+      throw new Error("You are not authorized to perform this action");
+    }
+
+    // Update the post
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        title: req.body.title,
+        body: req.body.body,
+      },
+      { new: true }
+    );
+
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-
-  // check if the user exists
-  if (!user) {
-    res.status(404);
-    throw new Error("User not found");
-  }
-
-  // check if the user is the owner of the post
-  if (post.user.toString() !== req.user._id.toString()) {
-    res.status(401);
-    throw new Error("You are not authorized to perform this action");
-  }
-
-  // update the post
-  const updatedPost = await Post.findByIdAndUpdate(
-    req.params.id,
-    {
-      title: req.body.title,
-      body: req.body.body,
-    },
-    { new: true }
-  );
-
-  res.status(200).json(updatedPost);
 };
 
 const deletePost = async (req, res) => {
