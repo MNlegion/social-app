@@ -1,28 +1,28 @@
-const Follow = require('../models/followModel');
+const Follow = require("../models/followModel");
 
 // Follow a user
 const followUser = async (req, res) => {
-    res.send('Follow a user');
-}
+  res.send("Follow a user");
+};
 
 // Unfollow a user
 const unfollowUser = async (req, res) => {
-    res.send('Unfollow a user');
-}
+  res.send("Unfollow a user");
+};
 
 // Get all followers
 const getFollowers = async (req, res) => {
-    res.send('Get all followers');
-}
+  res.send("Get all followers");
+};
 
 // Get all following
 const getFollowing = async (req, res) => {
-    res.send('Get all following');
-}
+  res.send("Get all following");
+};
 
 module.exports = {
-    followUser,
-    unfollowUser,
-    getFollowers,
-    getFollowing
+  followUser,
+  unfollowUser,
+  getFollowers,
+  getFollowing,
 };
