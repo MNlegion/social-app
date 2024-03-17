@@ -46,6 +46,12 @@ const loginUser = asyncHandler(async (req, res) => {
   // Find the user by email
   const user = await User.findOne({ email });
 
+  // If no email is found, throw an error
+  if (!user) {
+    res.status(401);
+    throw new Error("Email not found!");
+  }
+
   if (user && (await bcrypt.compare(password, user.password))) {
     // If the email and password match, generate a JWT token
     res.json({
@@ -62,34 +68,13 @@ const loginUser = asyncHandler(async (req, res) => {
 
 // Get user profile
 const getUserProfile = asyncHandler(async (req, res) => {
+  console.log(req.user._id);
   res.status(200).json(req.user);
 });
 
 // Update user profile
 const updateUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
-
-  if (user) {
-    user.username = req.body.username || user.username;
-    user.email = req.body.email || user.email;
-
-    if (req.body.password) {
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(req.body.password, salt);
-    }
-
-    const updatedUser = await user.save();
-
-    res.status(200).json({
-      _id: updatedUser._id,
-      username: updatedUser.username,
-      email: updatedUser.email,
-      token: generateToken(updatedUser._id),
-    });
-  } else {
-    res.status(404);
-    throw new Error("User not found");
-  }
+  res.status(200).json({ message: "Update profile" });
 });
 
 // Get User Friends

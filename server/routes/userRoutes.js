@@ -6,13 +6,13 @@ const {
   loginUser,
   getUserProfile,
   updateUserProfile,
-  getUserFriends,
+  // getUserFriends,
 } = require("../controllers/userController");
 
 // routes
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.route("/profile").get(getUserProfile).put(protect, updateUserProfile);
+router.route("/profile").get(protect, getUserProfile).put(protect, updateUserProfile);
 // router.get("/friends", getUserFriends);
 
 // export the router
