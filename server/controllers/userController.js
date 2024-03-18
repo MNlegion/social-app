@@ -3,7 +3,9 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 
-// Register a new user
+// @desc Register a new user
+// @route POST /api/users/register
+// @access Public
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -39,7 +41,9 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-// Login a user
+// @desc Login a user
+// @route POST /api/users/login
+// @access Public
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -66,10 +70,11 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-// Get user profile
+// @desc Get user profile
+// @route GET /api/users/profile
+// @access Private
 const getUserProfile = asyncHandler(async (req, res) => {
-  console.log(req.user._id);
-  res.status(200).json(req.user);
+  res.json({ message: "Get profile" });
 });
 
 // Update user profile
@@ -78,16 +83,16 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 });
 
 // Get User Friends
-const getUserFriends = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id).populate("friends");
+// const getUserFriends = asyncHandler(async (req, res) => {
+//   const user = await User.findById(req.user._id).populate("friends");
 
-  if (user) {
-    res.status(200).json(user.friends);
-  } else {
-    res.status(404);
-    throw new Error("User not found");
-  }
-});
+//   if (user) {
+//     res.status(200).json(user.friends);
+//   } else {
+//     res.status(404);
+//     throw new Error("User not found");
+//   }
+// });
 
 // Helper function to generate JWT token
 const generateToken = (userId) => {
@@ -102,6 +107,6 @@ module.exports = {
   loginUser,
   getUserProfile,
   updateUserProfile,
-  getUserFriends,
+  // getUserFriends,
 };
 
