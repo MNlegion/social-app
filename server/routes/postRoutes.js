@@ -11,7 +11,7 @@ const {
 
 // routes
 router.route("/").get(getPosts).post(protect, createPost);
-router.route("/:id").get(getSinglePost).put(updatePost).delete(deletePost);
+router.route("/:id").get(getSinglePost).put(protect, updatePost).delete(protect, deletePost);
 
 // export the router
 module.exports = router;
