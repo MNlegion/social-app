@@ -9,6 +9,11 @@ const User = require("../models/userModel");
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
 
+  if(!username || !email || !password) {
+    res.status(400);
+    throw new Error("Please fill in all fields");
+  }
+
   // Check if the user already exists by email
   const existingUser = await User.findOne({ email });
 
@@ -50,17 +55,11 @@ const loginUser = asyncHandler(async (req, res) => {
   // Find the user by email
   const user = await User.findOne({ email });
 
-  // If no email is found, throw an error
-  if (!user) {
-    res.status(401);
-    throw new Error("Email not found!");
-  }
-
   if (user && (await bcrypt.compare(password, user.password))) {
     // If the email and password match, generate a JWT token
     res.json({
       _id: user._id,
-      name: user.name,
+      username: user.username,
       email: user.email,
       token: generateToken(user._id),
     });
@@ -79,7 +78,26 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
 // Update user profile
 const updateUserProfile = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "Update profile" });
+  const { username, email } = req.body;
+
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.username = username || user.username;
+    user.email = email || user.email;
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      username: updatedUser.username,
+      email: updatedUser.email,
+      token: generateToken(updatedUser._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
 });
 
 // Get User Friends
@@ -95,8 +113,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // });
 
 // Helper function to generate JWT token
-const generateToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, {
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
 };
