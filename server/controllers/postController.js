@@ -2,27 +2,45 @@ const Post = require("../models/postModel");
 const User = require("../models/userModel");
 
 const getPosts = async (req, res) => {
-  try {
-    const posts = await Post.find();
-    res.status(200).json(posts);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to get posts" });
+  const posts = await Post.find();
+
+  if (!posts) {
+    throw new Error("No posts found");
   }
+
+  res.status(200).json(posts);
 };
 
 const createPost = async (req, res) => {
   const { title, body } = req.body;
-  try {
-    const post = new Post({
-      title,
-      body,
-      user: req.user._id,
-    });
-    await post.save();
+
+  const post = new Post({
+    title,
+    body,
+    user: req.user._id,
+  });
+
+  await post.save();
+
+  if (!post) {
+    throw new Error("Failed to create post");
+  } else {
     res.status(201).json(post);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to create post" });
   }
+
+
+
+  // try {
+  //   const post = new Post({
+  //     title,
+  //     body,
+  //     user: req.user._id,
+  //   });
+  //   await post.save();
+  //   res.status(201).json(post);
+  // } catch (error) {
+  //   res.status(500).json({ error: "Failed to create post" });
+  // }
 };
 
 const getSinglePost = async (req, res) => {
@@ -58,7 +76,19 @@ const updatePost = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
-  res.send("Delete post");
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+    if (post.user.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ error: "Not authorized" });
+    }
+    await post.deleteOne();
+    res.status(200).json({ message: "Post removed" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to remove post" });
+  }
 };
 
 // exports
