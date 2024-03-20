@@ -73,18 +73,35 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route GET /api/users/profile
 // @access Private
 const getUserProfile = asyncHandler(async (req, res) => {
-  res.json({ message: "Get profile" });
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    res.status(200).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      profileImage: user.profileImage,
+      bio: user.bio,
+      website: user.website,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
 });
 
 // Update user profile
 const updateUserProfile = asyncHandler(async (req, res) => {
-  const { username, email } = req.body;
+  const { username, email, profileImage, bio, website } = req.body;
 
   const user = await User.findById(req.user._id);
 
   if (user) {
     user.username = username || user.username;
     user.email = email || user.email;
+    user.profileImage = profileImage || user.profileImage;
+    user.bio = bio || user.bio;
+    user.website = website || user.website;
 
     const updatedUser = await user.save();
 
@@ -92,6 +109,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       username: updatedUser.username,
       email: updatedUser.email,
+      profileImage: updatedUser.profileImage,
+      bio: updatedUser.bio,
+      website: updatedUser.website,
       token: generateToken(updatedUser._id),
     });
   } else {
