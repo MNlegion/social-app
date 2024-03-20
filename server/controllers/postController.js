@@ -26,11 +26,35 @@ const createPost = async (req, res) => {
 };
 
 const getSinglePost = async (req, res) => {
-  res.send("Single post");
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to get post" });
+  }
 };
 
 const updatePost = async (req, res) => {
-  res.send("Update post");
+  const { title, body, tags } = req.body;
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+    if (post.user.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ error: "Not authorized" });
+    }
+    post.title = title;
+    post.body = body;
+    post.tags = tags;
+    await post.save();
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update post" });
+  }
 };
 
 const deletePost = async (req, res) => {
