@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { userPostMiddleware } = require("../middleware/userPostMiddleware");
 
 const userSchema = new mongoose.Schema(
   {
@@ -67,5 +68,8 @@ const userSchema = new mongoose.Schema(
     collection: "users",
   }
 );
+
+// Middleware to update posts when user is updated
+userSchema.post("save", userPostMiddleware);
 
 module.exports = mongoose.model("User", userSchema);

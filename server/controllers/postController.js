@@ -27,20 +27,6 @@ const createPost = async (req, res) => {
   } else {
     res.status(201).json(post);
   }
-
-
-
-  // try {
-  //   const post = new Post({
-  //     title,
-  //     body,
-  //     user: req.user._id,
-  //   });
-  //   await post.save();
-  //   res.status(201).json(post);
-  // } catch (error) {
-  //   res.status(500).json({ error: "Failed to create post" });
-  // }
 };
 
 const getSinglePost = async (req, res) => {
