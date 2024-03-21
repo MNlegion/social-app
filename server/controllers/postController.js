@@ -52,7 +52,7 @@ const getSinglePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
-      return res.status(404).json({ error: "Post not found" });
+      throw new Error("Post not found");
     }
     res.status(200).json(post);
   } catch (error) {
@@ -88,18 +88,46 @@ const updatePost = async (req, res) => {
 // @access Private
 const deletePost = async (req, res) => {
   try {
+    // Find the post to be deleted
     const post = await Post.findById(req.params.id);
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
     }
-    if (post.user.toString() !== req.user._id.toString()) {
-      return res.status(401).json({ error: "Not authorized" });
+
+    // Find the user who owns the post
+    const user = await User.findById(post.user);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
-    await post.deleteOne();
-    res.status(200).json({ message: "Post removed" });
+
+    // Remove the ID of the deleted post from the user's posts array
+    user.posts = user.posts.filter(postId => postId.toString() !== req.params.id);
+
+    // Save the updated user document
+    await user.save();
+
+    // Delete the post
+    await post.delete();
+
+    // Send a success response
+    res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Failed to remove post" });
+    // Handle errors
+    res.status(500).json({ error: "Failed to delete post" });
   }
+  // try {
+  //   const post = await Post.findById(req.params.id);
+  //   if (!post) {
+  //     return res.status(404).json({ error: "Post not found" });
+  //   }
+  //   if (post.user.toString() !== req.user._id.toString()) {
+  //     return res.status(401).json({ error: "Not authorized" });
+  //   }
+  //   await post.deleteOne();
+  //   res.status(200).json({ message: "Post removed" });
+  // } catch (error) {
+  //   res.status(500).json({ error: "Failed to remove post" });
+  // }
 };
 
 // exports
