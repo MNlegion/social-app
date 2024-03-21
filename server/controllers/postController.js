@@ -1,16 +1,10 @@
 const Post = require("../models/postModel");
 const User = require("../models/userModel");
 
-const getPosts = async (req, res) => {
-  const posts = await Post.find();
 
-  if (!posts) {
-    throw new Error("No posts found");
-  }
-
-  res.status(200).json(posts);
-};
-
+// @desc Create a new post
+// @route POST /api/posts
+// @access Private
 const createPost = async (req, res) => {
   if(!req.body.title || !req.body.body) {
     res.status(400);
@@ -38,6 +32,22 @@ const createPost = async (req, res) => {
   res.status(201).json(post);
 };
 
+// @desc Get all posts
+// @route GET /api/posts
+// @access Public
+const getPosts = async (req, res) => {
+  const posts = await Post.find();
+
+  if (!posts) {
+    throw new Error("No posts found");
+  }
+
+  res.status(200).json(posts);
+};
+
+// @desc Get a single post
+// @route GET /api/posts/:id
+// @access Public
 const getSinglePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -50,6 +60,9 @@ const getSinglePost = async (req, res) => {
   }
 };
 
+// @desc Update a post
+// @route PUT /api/posts/:id
+// @access Private
 const updatePost = async (req, res) => {
   const { title, body, tags } = req.body;
   try {
@@ -70,6 +83,9 @@ const updatePost = async (req, res) => {
   }
 };
 
+// @desc Delete a post
+// @route DELETE /api/posts/:id
+// @access Private
 const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
