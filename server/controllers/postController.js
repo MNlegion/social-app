@@ -68,10 +68,10 @@ const updatePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
-      return res.status(404).json({ error: "Post not found" });
+      throw new Error("Post not found");
     }
     if (post.user.toString() !== req.user._id.toString()) {
-      return res.status(401).json({ error: "Not authorized" });
+      throw new Error("You are not authorized to update this post");
     }
     post.title = title;
     post.body = body;
@@ -91,13 +91,13 @@ const deletePost = async (req, res) => {
     // Find the post to be deleted
     const post = await Post.findById(req.params.id);
     if (!post) {
-      return res.status(404).json({ error: "Post not found" });
+      throw new Error("Post not found");
     }
 
     // Find the user who owns the post
     const user = await User.findById(post.user);
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      throw new Error("User not found");
     }
 
     // Remove the ID of the deleted post from the user's posts array
@@ -110,10 +110,10 @@ const deletePost = async (req, res) => {
     await post.deleteOne();
 
     // Send a success response
-    res.status(200).json({ message: "Post deleted successfully" });
+    res.status(200).json({ Success: "Post Deleted" });
   } catch (error) {
     // Handle errors
-    res.status(500).json({ error: "Failed to delete post" });
+    res.status(500).json({ Error: "Failed to delete post" });
   }
 };
 
