@@ -83,6 +83,12 @@ const getUserProfile = asyncHandler(async (req, res) => {
       profileImage: user.profileImage,
       bio: user.bio,
       website: user.website,
+      followers: user.followers,
+      following: user.following,
+      posts: user.posts,
+      savedPosts: user.savedPosts,
+      notifications: user.notifications,
+      messages: user.messages,
     });
   } else {
     res.status(404);

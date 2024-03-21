@@ -12,21 +12,46 @@ const getPosts = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const { title, body } = req.body;
+  if(!req.body.title || !req.body.body) {
+    res.status(400);
+    throw new Error("Title and body are required");
+  }
 
-  const post = new Post({
-    title,
-    body,
+  // create a new post
+  const post = await Post.create({
+    title: req.body.title,
+    body: req.body.body,
     user: req.user._id,
   });
 
-  await post.save();
+  // get the logged in user
+  const user = await User.findById(req.user._id);
 
-  if (!post) {
-    throw new Error("Failed to create post");
+  if (user) {
+    user.posts.push(post._id);
+    await user.save();
   } else {
-    res.status(201).json(post);
+    res.status(404);
+    throw new Error("User not found");
   }
+
+  res.status(201).json(post);
+
+  // const { title, body } = req.body;
+
+  // const post = new Post({
+  //   title,
+  //   body,
+  //   user: req.user._id,
+  // });
+
+  // await post.save();
+
+  // if (!post) {
+  //   throw new Error("Failed to create post");
+  // } else {
+  //   res.status(201).json(post);
+  // }
 };
 
 const getSinglePost = async (req, res) => {
