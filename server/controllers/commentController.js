@@ -11,7 +11,7 @@ const createComment = asyncHandler(async (req, res) => {
     const postId = req.params.postId;
   
     // Create the comment
-    const comment = await Comment.create({ content, author });
+    const comment = await Comment.create({ content, author, post: postId });
   
     // Update the corresponding post document to include the comment
     await Post.findByIdAndUpdate(postId, { $push: { comments: comment._id } });
@@ -25,7 +25,7 @@ const createComment = asyncHandler(async (req, res) => {
 const getComments = asyncHandler(async (req, res) => {
   const postId = req.params.postId;
   const comments = await Comment.find({ post: postId }).populate(
-    "user",
+    "author",
     "username"
   );
   res.json(comments);
