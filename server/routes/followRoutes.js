@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { protect } = require("../middleware/authMiddleware");
 const {
   followUser,
   unfollowUser,
@@ -8,10 +9,10 @@ const {
 } = require("../controllers/followController");
 
 // routes
-router.post("/follow", followUser);
-router.post("/unfollow", unfollowUser);
-router.get("/followers", getFollowers);
-router.get("/following", getFollowing);
+router.post("/:userId", protect, followUser);
+router.post("/unfollow", protect, unfollowUser);
+router.get("/followers", protect, getFollowers);
+router.get("/following", protect, getFollowing);
 
 // export the router
 module.exports = router;
