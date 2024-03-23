@@ -12,7 +12,7 @@ const {
 // routes
 router.post('/:postId', protect, createComment);
 router.get('/:postId', getComments);
-router.route('/:id').put(updateComment).delete(deleteComment);
+router.route('/:id').put(protect, updateComment).delete(protect, deleteComment);
 
 // export the router
 module.exports = router;

@@ -59,7 +59,36 @@ const updateComment = async (req, res) => {
 // @route DELETE /api/comments/:id
 // @access Private
 const deleteComment = async (req, res) => {
-  res.send("Delete comment");
+    try {
+        // Find the comment to be deleted
+        const comment = await Comment.findById(req.params.id);
+        if (!comment) {
+            res.status(404);
+            throw new Error("Comment not found");
+        }
+
+        // Find the post that the comment belongs to
+        const post = await Post.findById(comment.post);
+        if (!post) {
+            res.status(404);
+            throw new Error("Post not found");
+        }
+
+        // Remove the comment from the post's comments array
+        post.comments = post.comments.filter(
+            (commentId) => commentId.toString() !== req.params.id
+        );
+
+        // Save the updated post
+        await post.save();
+
+        // Delete the comment
+        await comment.deleteOne();
+
+        res.json({ Success: "Comment deleted" });
+    } catch (error) {
+        res.status(500).json({ Error: "Failed to delete comment" });
+    }
 };
 
 module.exports = {
