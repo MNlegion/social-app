@@ -34,15 +34,25 @@ const getComments = asyncHandler(async (req, res) => {
 // @desc Get a single comment by ID
 // @route GET /api/comments/:id
 // @access Public
-const getSingleComment = async (req, res) => {
-  res.send("Get single comment");
-};
+// const getSingleComment = async (req, res) => {
+//   res.send("Get single comment");
+// };
 
 // @desc Update a comment by ID
 // @route PUT /api/comments/:id
 // @access Private
 const updateComment = async (req, res) => {
-  res.send("Update comment");
+    const { content } = req.body;
+    const comment = await Comment.findById(req.params.id);
+
+    if (comment) {
+        comment.content = content;
+        const updatedComment = await comment.save();
+        res.json(updatedComment);
+    } else {
+        res.status(404);
+        throw new Error("Comment not found");
+    }
 };
 
 // @desc Delete a comment by ID
@@ -55,7 +65,7 @@ const deleteComment = async (req, res) => {
 module.exports = {
   createComment,
   getComments,
-  getSingleComment,
+//   getSingleComment,
   updateComment,
   deleteComment,
 };
