@@ -1,28 +1,23 @@
 const Comment = require("../models/commentModel");
+const Post = require("../models/postModel");
 const asyncHandler = require("express-async-handler");
 
 // @desc Create a new comment
 // @route POST /api/comments/:postId
 // @access Private
-const createComment = async (req, res) => {
-  const postId = req.params.postId;
-  const { content } = req.body;
-
-  // Ensure the content is provided
-  if (!content) {
-    res.status(400);
-    throw new Error("Comment content is required");
-  }
-
-  // Create the new comment
-  const newComment = await Comment.create({
-    user: req.user._id, // Assuming the user is authenticated and their ID is available in req.user
-    post: postId,
-    content,
+const createComment = asyncHandler(async (req, res) => {
+    const { content } = req.body;
+    const author = req.user._id;
+    const postId = req.params.postId;
+  
+    // Create the comment
+    const comment = await Comment.create({ content, author });
+  
+    // Update the corresponding post document to include the comment
+    await Post.findByIdAndUpdate(postId, { $push: { comments: comment._id } });
+  
+    res.status(201).json(comment);
   });
-
-  res.status(201).json(newComment);
-};
 
 // @desc Get all comments for a specific post
 // @route GET /api/comments/:postId
