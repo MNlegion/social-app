@@ -13,8 +13,8 @@ const followUser = asyncHandler(async (req, res) => {
   }
 
   // Check if the user is already following the user
-  const alreadyFollowing = await Follow.findOne({ 
-    follower: req.user._id, 
+  const alreadyFollowing = await Follow.findOne({
+    follower: req.user._id,
     following: userId,
   });
 
@@ -30,17 +30,50 @@ const followUser = asyncHandler(async (req, res) => {
   });
 
   // Update the corresponding User document to include the follow
-  await User.findByIdAndUpdate(req.user._id, { $addToSet: { following: userId } });
+  await User.findByIdAndUpdate(req.user._id, {
+    $addToSet: { following: userId },
+  });
 
   // Update the corresponding User document to include the follower
-  await User.findByIdAndUpdate(userId, { $addToSet: { followers: req.user._id } });
+  await User.findByIdAndUpdate(userId, {
+    $addToSet: { followers: req.user._id },
+  });
 
   res.status(201).json(follow);
 });
 
 // Unfollow a user
 const unfollowUser = async (req, res) => {
-  res.send("Unfollow a user");
+  const { userId } = req.params; // id of user to unfollow
+
+  // Check if the user is following the user
+  const following = await Follow.findOne({
+    follower: req.user._id,
+    following: userId,
+  });
+
+  if (!following) {
+    res.status(400);
+    throw new Error("You are not following this user");
+  }
+
+  // Delete the follow relationship
+  await Follow.findOneAndDelete({
+    follower: req.user._id,
+    following: userId,
+  });
+
+  // Update the corresponding User document to remove the follow
+  await User.findByIdAndUpdate(req.user._id, {
+    $pull: { following: userId },
+  });
+
+  // Update the corresponding User document to remove the follower
+  await User.findByIdAndUpdate(userId, {
+    $pull: { followers: req.user._id },
+  });
+
+  res.status(200).json({ message: "User unfollowed" });
 };
 
 // Get all followers

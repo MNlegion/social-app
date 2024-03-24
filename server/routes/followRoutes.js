@@ -9,8 +9,7 @@ const {
 } = require("../controllers/followController");
 
 // routes
-router.post("/:userId", protect, followUser);
-router.post("/unfollow", protect, unfollowUser);
+router.route("/:userId").post(protect, followUser).delete(protect, unfollowUser);
 router.get("/followers", protect, getFollowers);
 router.get("/following", protect, getFollowing);
 
