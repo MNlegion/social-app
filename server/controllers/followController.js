@@ -13,9 +13,9 @@ const followUser = asyncHandler(async (req, res) => {
   }
 
   // Check if the user is already following the user
-  const alreadyFollowing = await Follow.findOne({
-    follower: req.user._id,
-    follow: userId,
+  const alreadyFollowing = await Follow.findOne({ 
+    follower: req.user._id, 
+    following: userId,
   });
 
   if (alreadyFollowing) {
@@ -26,14 +26,14 @@ const followUser = asyncHandler(async (req, res) => {
   // Create the follow relationship
   const follow = await Follow.create({
     follower: req.user._id,
-    follow: userId,
+    following: userId,
   });
 
   // Update the corresponding User document to include the follow
-  await User.findByIdAndUpdate(req.user._id, { $push: { following: userId } });
+  await User.findByIdAndUpdate(req.user._id, { $addToSet: { following: userId } });
 
   // Update the corresponding User document to include the follower
-  await User.findByIdAndUpdate(userId, { $push: { followers: req.user._id } });
+  await User.findByIdAndUpdate(userId, { $addToSet: { followers: req.user._id } });
 
   res.status(201).json(follow);
 });
