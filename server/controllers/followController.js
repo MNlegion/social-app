@@ -2,7 +2,9 @@ const asyncHandler = require("express-async-handler");
 const Follow = require("../models/followModel");
 const User = require("../models/userModel");
 
-// Follow a user
+// @desc    Follow a user
+// @route   POST /api/follow/:userId
+// @access  Private
 const followUser = asyncHandler(async (req, res) => {
   const { userId } = req.params; // id of user to follow
 
@@ -42,7 +44,9 @@ const followUser = asyncHandler(async (req, res) => {
   res.status(201).json(follow);
 });
 
-// Unfollow a user
+// @desc    Unfollow a user
+// @route   DELETE /api/follow/:userId
+// @access  Private
 const unfollowUser = async (req, res) => {
   const { userId } = req.params; // id of user to unfollow
 
@@ -76,12 +80,16 @@ const unfollowUser = async (req, res) => {
   res.status(200).json({ message: "User unfollowed" });
 };
 
-// Get all followers
+// @desc    Get all followers
+// @route   GET /api/follow/followers
+// @access  Private
 const getFollowers = async (req, res) => {
   res.send("Get all followers");
 };
 
-// Get all following
+// @desc    Get all following
+// @route   GET /api/follow/following
+// @access  Private
 const getFollowing = async (req, res) => {
   res.send("Get all following");
 };
