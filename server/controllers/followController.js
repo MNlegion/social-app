@@ -96,7 +96,12 @@ const getFollowers = async (req, res) => {
 // @route   GET /api/follow/following
 // @access  Private
 const getFollowing = async (req, res) => {
-  res.send("Get all following");
+  const following = await Follow.find({ follower: req.user._id }).populate(
+    "following",
+    "profileImage username"
+  );
+
+  res.json(following);
 };
 
 module.exports = {
