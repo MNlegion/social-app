@@ -84,7 +84,12 @@ const unfollowUser = async (req, res) => {
 // @route   GET /api/follow/followers
 // @access  Private
 const getFollowers = async (req, res) => {
-  res.send("Get all followers");
+  const followers = await Follow.find({ following: req.user._id }).populate(
+    "follower",
+    "profileImage username"
+  );
+
+  res.json(followers);
 };
 
 // @desc    Get all following
