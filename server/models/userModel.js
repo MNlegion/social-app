@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Post = require("./postModel");
 // const { userPostMiddleware } = require("../middleware/userPostMiddleware");
 
 const userSchema = new mongoose.Schema(
@@ -68,6 +69,11 @@ const userSchema = new mongoose.Schema(
     collection: "users",
   }
 );
+
+// Pre-hook to cascade delete posts when user is deleted
+// userSchema.pre("remove", async function (next) {
+//   await this.model("Post").deleteMany({ user: this._id }, next);
+// });
 
 // Middleware to update posts when user is updated
 // userSchema.post("save", userPostMiddleware);
