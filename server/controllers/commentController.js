@@ -31,13 +31,6 @@ const getComments = asyncHandler(async (req, res) => {
   res.json(comments);
 });
 
-// @desc Get a single comment by ID
-// @route GET /api/comments/:id
-// @access Public
-// const getSingleComment = async (req, res) => {
-//   res.send("Get single comment");
-// };
-
 // @desc Update a comment by ID
 // @route PUT /api/comments/:id
 // @access Private
@@ -94,7 +87,6 @@ const deleteComment = async (req, res) => {
 module.exports = {
   createComment,
   getComments,
-  //   getSingleComment,
   updateComment,
   deleteComment,
 };
