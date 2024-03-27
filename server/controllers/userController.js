@@ -9,7 +9,7 @@ const User = require("../models/userModel");
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
 
-  if(!username || !email || !password) {
+  if (!username || !email || !password) {
     res.status(400);
     throw new Error("Please fill in all fields");
   }
@@ -153,4 +153,3 @@ module.exports = {
   updateUserProfile,
   // getUserFriends,
 };
-
