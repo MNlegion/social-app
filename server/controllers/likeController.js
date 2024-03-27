@@ -2,7 +2,9 @@ const Like = require("../models/likeModel");
 const Post = require("../models/postModel");
 const asyncHandler = require("express-async-handler");
 
-// Like a post
+// @desc    Like a post
+// @route   POST /api/likes/:postId
+// @access  Private
 const likePost = asyncHandler(async (req, res) => {
   const { postId } = req.params;
 
@@ -34,7 +36,9 @@ const likePost = asyncHandler(async (req, res) => {
   res.status(201).json(like);
 });
 
-// Unlike a post
+// @desc    Unlike a post
+// @route   DELETE /api/likes/:postId
+// @access  Private
 const unlikePost = asyncHandler(async (req, res) => {
   const { postId } = req.params;
 
