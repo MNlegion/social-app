@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const { protect } = require('../middleware/authMiddleware');
 const {
   likePost,
   unlikePost,
 } = require('../controllers/likeController');
 
 // routes
-router.route('/').post(likePost);
-router.route('/unlike').post(unlikePost);
+router.route('/:postId').post(protect, likePost).delete(protect, unlikePost);
 
 // export the router
 module.exports = router;
