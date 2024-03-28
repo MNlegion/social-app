@@ -96,7 +96,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-// Update user profile
+// @desc Update user profile
+// @route PUT /api/users/profile
+// @access Private
 const updateUserProfile = asyncHandler(async (req, res) => {
   const { username, email, profileImage, bio, website } = req.body;
 
@@ -120,6 +122,21 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       website: updatedUser.website,
       token: generateToken(updatedUser._id),
     });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+// @desc Delete user profile
+// @route DELETE /api/users/profile
+// @access Private
+const deleteUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    await user.deleteOne();
+    res.json({ message: "User removed" });
   } else {
     res.status(404);
     throw new Error("User not found");
@@ -151,5 +168,6 @@ module.exports = {
   loginUser,
   getUserProfile,
   updateUserProfile,
+  deleteUserProfile,
   // getUserFriends,
 };
