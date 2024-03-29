@@ -40,8 +40,10 @@ const postSchema = new mongoose.Schema(
 );
 
 // Pre-hook to cascade delete comments when post is deleted
-// postSchema.pre('remove', async function (next) {
-//   await this.model('Comment').deleteMany({ post: this._id }, next);
-// });
+postSchema.pre("deleteOne", async function (next) {
+  const postId = this._conditions.user;
+  await Comment.deleteMany({ post: postId });
+  next();
+});
 
 module.exports = mongoose.model("Post", postSchema);
