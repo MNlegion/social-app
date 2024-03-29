@@ -73,7 +73,6 @@ const userSchema = new mongoose.Schema(
 // Pre-hook to cascade delete posts when user is deleted
 userSchema.pre("deleteOne", async function (next) {
   const userId = this._conditions._id;
-  console.log({ userId }); // Check if the userId is correctly populated
   await Post.deleteMany({ user: userId });
   next();
 });
