@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Comment = require("./commentModel");
 
 const postSchema = new mongoose.Schema(
   {
@@ -41,7 +42,7 @@ const postSchema = new mongoose.Schema(
 
 // Pre-hook to cascade delete comments when post is deleted
 postSchema.pre("deleteOne", async function (next) {
-  const postId = this._conditions.user;
+  const postId = this._conditions._id;
   await Comment.deleteMany({ post: postId });
   next();
 });
