@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Comment = require("./commentModel");
+const Like = require("./likeModel");
 
 const postSchema = new mongoose.Schema(
   {
@@ -21,7 +22,7 @@ const postSchema = new mongoose.Schema(
       required: true,
     },
     likes: {
-      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Like' }],
       default: [],
     },
     comments: {
@@ -43,7 +44,11 @@ const postSchema = new mongoose.Schema(
 // Pre-hook to cascade delete comments when post is deleted
 postSchema.pre("deleteOne", async function (next) {
   const postId = this._conditions._id;
+
   await Comment.deleteMany({ post: postId });
+
+  await Like.deleteMany({ post: postId });
+
   next();
 });
 
