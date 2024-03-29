@@ -143,18 +143,6 @@ const deleteUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-// Get User Friends
-// const getUserFriends = asyncHandler(async (req, res) => {
-//   const user = await User.findById(req.user._id).populate("friends");
-
-//   if (user) {
-//     res.status(200).json(user.friends);
-//   } else {
-//     res.status(404);
-//     throw new Error("User not found");
-//   }
-// });
-
 // Helper function to generate JWT token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -169,5 +157,4 @@ module.exports = {
   getUserProfile,
   updateUserProfile,
   deleteUserProfile,
-  // getUserFriends,
 };
