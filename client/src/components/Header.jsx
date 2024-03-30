@@ -1,5 +1,5 @@
 import React from "react";
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaSignInAlt, FaSignOutAlt, FaUser, FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -23,7 +23,7 @@ function Header() {
         </li>
         <li>
           <Link to="/register">
-            <FaSignOutAlt /> Register
+            <FaUserPlus /> Register
           </Link>
         </li>
       </ul>
