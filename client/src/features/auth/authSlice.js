@@ -34,8 +34,24 @@ export const authSlice = createSlice({
             state.message = "";
         },
     },
-    extraReducers: () => {
-
+    extraReducers: (builder) => {
+        builder
+            .addCase(register.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(register.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.isError = false;
+                state.user = action.payload;
+            })
+            .addCase(register.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.payload;
+                state.user = null;
+            });
     },
 });
 
