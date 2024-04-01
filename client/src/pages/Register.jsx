@@ -30,10 +30,11 @@ function Register() {
     }
 
     if (isSuccess || user) {
+      dispatch(reset());
       navigate("/");
     }
 
-    dispatch(reset());
+    // dispatch(reset());
   }, [user, isSuccess, isError, message, navigate, dispatch]);
 
   const onChange = (e) => {
@@ -81,6 +82,7 @@ function Register() {
               id="username"
               name="username"
               value={username}
+              autoComplete="username"
               placeholder="Enter your Username"
               onChange={onChange}
             />
@@ -92,6 +94,7 @@ function Register() {
               id="email"
               name="email"
               value={email}
+              autoComplete="email"
               placeholder="Enter your Email"
               onChange={onChange}
             />
@@ -103,6 +106,7 @@ function Register() {
               id="password"
               name="password"
               value={password}
+              autoComplete="new-password"
               placeholder="Enter your Password"
               onChange={onChange}
             />
