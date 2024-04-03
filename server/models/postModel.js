@@ -4,22 +4,22 @@ const Like = require("./likeModel");
 
 const postSchema = new mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     title: {
       type: String,
       required: true,
       trim: true,
       maxlength: 40,
     },
-    body: {
+    content: {
       type: String,
       required: true,
       trim: true,
       maxlength: 2000,
-    },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
     },
     likes: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Like' }],

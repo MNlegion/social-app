@@ -6,7 +6,7 @@ const User = require("../models/userModel");
 // @route POST /api/posts
 // @access Private
 const createPost = async (req, res) => {
-  if(!req.body.title || !req.body.body) {
+  if(!req.body.title || !req.body.content) {
     res.status(400);
     throw new Error("Title and body are required");
   }
@@ -14,7 +14,7 @@ const createPost = async (req, res) => {
   // create a new post
   const post = await Post.create({
     title: req.body.title,
-    body: req.body.body,
+    content: req.body.content,
     user: req.user._id,
   });
 
@@ -64,7 +64,7 @@ const getSinglePost = async (req, res) => {
 // @route PUT /api/posts/:id
 // @access Private
 const updatePost = async (req, res) => {
-  const { title, body, tags } = req.body;
+  const { title, content, tags } = req.body;
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
@@ -74,7 +74,7 @@ const updatePost = async (req, res) => {
       throw new Error("You are not authorized to update this post");
     }
     post.title = title;
-    post.body = body;
+    post.content = content;
     post.tags = tags;
     await post.save();
     res.status(200).json(post);
