@@ -131,7 +131,7 @@ export const postSlice = createSlice({
             .addCase(deletePost.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.posts = state.posts.filter((post) => post.id !== action.payload.id);
+                state.posts = state.posts.filter((post) => post.id !== action.payload);
             })
             .addCase(deletePost.rejected, (state, action) => {
                 state.isLoading = false;

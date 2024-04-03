@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import PostForm from "../components/PostForm";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -15,20 +16,12 @@ function Dashboard() {
 
   return (
     <>
-      <h1>Dashboard</h1>
-      <p>Welcome back, {user.username}</p>
+    <section className="heading">
+      <h1>{user.username}'s Dashboard</h1>
+    </section>
 
-      <div>
-        <h2>Posts</h2>
-        <ul>
-          <li>Post 1</li>
-          <li>Post 2</li>
-          <li>Post 3</li>
-        </ul>
-      </div>
+    <PostForm />
     </>
-
-    
   );
 }
 

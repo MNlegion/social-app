@@ -2,39 +2,54 @@ import axios from "axios";
 
 const API_URL = "/api/posts/";
 
-// Fetch all posts
 const fetchPosts = async () => {
-  const response = await axios.get(API_URL);
-
-  return response.data;
+  try {
+    const response = await axios.get(API_URL);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    throw error; // Rethrow the error to be handled by the caller
+  }
 };
 
-// Fetch single post
 const fetchPost = async (id) => {
-  const response = await axios.get(API_URL + id);
-
-  return response.data;
+  try {
+    const response = await axios.get(API_URL + id);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    throw error;
+  }
 };
 
-// Create new post
 const createPost = async (post) => {
-  const response = await axios.post(API_URL, post);
-
-  return response.data;
+  try {
+    const response = await axios.post(API_URL, post);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating post:", error);
+    throw error;
+  }
 };
 
-// Update post
 const updatePost = async (post) => {
-  const response = await axios.put(API_URL + post.id, post);
-
-  return response.data;
+  try {
+    const response = await axios.put(API_URL + post.id, post);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating post:", error);
+    throw error;
+  }
 };
 
-// Delete post
 const deletePost = async (id) => {
-  const response = await axios.delete(API_URL + id);
-
-  return response.data;
+  try {
+    const response = await axios.delete(API_URL + id);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    throw error;
+  }
 };
 
 const postService = {
