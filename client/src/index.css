@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
+:root {
+  --primary-color: #1F75FE;
+  --secondary-color: #485665;
+  --danger-color: #FF0000;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +19,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #000;
+  color: var(--secondary-color);
 }
 
 p {
@@ -48,7 +54,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid var(--secondary-color);
   margin-bottom: 60px;
 }
 
@@ -80,6 +86,10 @@ h3 {
   font-weight: 700;
   margin-bottom: 50px;
   padding: 0 20px;
+}
+
+.heading h1 {
+  color: var(--secondary-color);
 }
 
 .heading p {
@@ -114,8 +124,16 @@ h3 {
   margin: 0 auto;
 }
 
+.form h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
 .form-group {
   margin-bottom: 10px;
+  color: var(--secondary-color);
 }
 
 .form-group input,
@@ -123,7 +141,7 @@ h3 {
 .form-group select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--secondary-color);
   border-radius: 5px;
   margin-bottom: 10px;
   font-family: inherit;
@@ -137,9 +155,9 @@ h3 {
 
 .btn {
   padding: 10px 20px;
-  border: 1px solid #000;
+  border: 0;
   border-radius: 5px;
-  background: #000;
+  background: var(--primary-color);
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -149,6 +167,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Horizontal offset, vertical offset, blur radius, and color */
 }
 
 .btn svg {
@@ -167,6 +186,7 @@ h3 {
 
 .btn:hover {
   transform: scale(0.98);
+  box-shadow: 6px 4px 8px rgba(0, 0, 0, 0.6); /* Horizontal offset, vertical offset, blur radius, and color */
 }
 
 .loadingSpinnerContainer {

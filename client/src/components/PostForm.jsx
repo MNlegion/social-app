@@ -19,6 +19,7 @@ function PostForm() {
 
   return (
     <section className="form">
+      <h2>Create a new post</h2>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title:</label>
