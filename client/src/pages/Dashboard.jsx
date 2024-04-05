@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import PostForm from "../components/PostForm";
+import PostItem from "../components/PostItem";
 import { getUserPosts, reset } from "../features/posts/postSlice";
 
 function Dashboard() {
