@@ -32,11 +32,24 @@ const createPost = async (req, res) => {
   res.status(201).json(post);
 };
 
-// @desc Get all posts
+// @desc Get all posts from all users
 // @route GET /api/posts
 // @access Public
 const getPosts = async (req, res) => {
   const posts = await Post.find();
+
+  if (!posts) {
+    throw new Error("No posts found");
+  }
+
+  res.status(200).json(posts);
+};
+
+// @desc Get all posts from a single user
+// @route GET /api/posts/user/:id
+// @access Public
+const getUserPosts = async (req, res) => {
+  const posts = await Post.find({ user: req.params.id });
 
   if (!posts) {
     throw new Error("No posts found");
@@ -120,8 +133,9 @@ const deletePost = async (req, res) => {
 
 // exports
 module.exports = {
-  getPosts,
   createPost,
+  getPosts,
+  getUserPosts,
   getSinglePost,
   updatePost,
   deletePost,
