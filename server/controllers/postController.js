@@ -16,7 +16,10 @@ const createPost = async (req, res) => {
     title: req.body.title,
     content: req.body.content,
     user: req.user._id,
+    username: req.user.username,
   });
+
+  console.log(req.user)
 
   // get the logged in user
   const user = await User.findById(req.user._id);
