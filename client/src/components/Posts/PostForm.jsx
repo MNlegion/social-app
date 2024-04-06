@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createPost } from "../features/posts/postSlice";
+import { createPost } from "../../features/posts/postSlice";
 
 function PostForm() {
   const [title, setTitle] = useState("");

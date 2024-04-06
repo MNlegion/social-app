@@ -1,7 +1,7 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { deletePost } from "../features/posts/postSlice";
+import { deletePost } from "../../features/posts/postSlice";
 
 function PostItem({ post }) {
   const loggedInUserId = useSelector((state) => state.auth.user._id);
