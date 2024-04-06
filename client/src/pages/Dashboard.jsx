@@ -85,6 +85,21 @@ function Dashboard() {
           <h2>Followers</h2>
           <p>View Followers</p>
         </Link>
+        {/* Category Card for Posts */}
+        <Link to="/test" className="category-card">
+          <h2>Test</h2>
+          <p>Test</p>
+        </Link>
+        {/* Add more category cards for other actions */}
+        <Link to="/test1" className="category-card">
+          <h2>Test</h2>
+          <p>Test</p>
+        </Link>
+        {/* Add more category cards for other actions */}
+        <Link to="/test2" className="category-card">
+          <h2>Test</h2>
+          <p>Test</p>
+        </Link>
       </div>
     </>
   );
