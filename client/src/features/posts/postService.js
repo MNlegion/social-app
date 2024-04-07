@@ -31,9 +31,12 @@ const deletePost = async (postId, token) => {
     },
   };
 
-  const response = await axios.delete(`${API_URL}${postId}`, config);
+  const response = await axios.delete(`${API_URL}${postId}`, config)
+  if(response.data){
+    return postId;
+  }
 
-  return response.data;
+  return postId;
 };
 
 // export default postService;
