@@ -28,7 +28,7 @@ function PostPage() {
   return (
     <>
       <section className="heading">
-        <h1>{user.username}'s Dashboard</h1>
+        <h1>{user.username}'s Post Page</h1>
       </section>
 
       <PostForm />

@@ -3,6 +3,8 @@
 :root {
   --primary-color: #1F75FE;
   --secondary-color: #485665;
+  --tertiary-white: #DFE3EE;
+  --white: #f7f7f7;
   --danger-color: #FF0000;
 }
 
