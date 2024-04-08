@@ -7,7 +7,7 @@ const {
 } = require('../controllers/likeController');
 
 // routes
-router.route('/:postId').post(protect, likePost).delete(protect, unlikePost);
+router.route('/:postId').put(protect, likePost).delete(protect, unlikePost);
 
 // export the router
 module.exports = router;

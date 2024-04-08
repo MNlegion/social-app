@@ -98,6 +98,7 @@ h3 {
   color: #828282;
 }
 
+/* Category Card Styling */
 .category-cards {
   margin: 20px;
   display: flex;
@@ -131,20 +132,28 @@ h3 {
   color: #666;
 }
 
+/* Post Item Styling */
 .posts {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 
-.post {
+.post-item {
   background-color: #f4f4f4;
+  border-radius: 10px;
   margin: 10px 0;
   padding: 20px 0 10px;
   position: relative;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.post .close {
+.post-item:hover {
+  transform: scale(0.98);
+  box-shadow: 6px 4px 8px rgba(0, 0, 0, 0.6); /* Horizontal offset, vertical offset, blur radius, and color */
+}
+
+.post-item .close {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -168,6 +177,34 @@ h3 {
 .info div {
   color: var(--secondary-color);
   font-size: 0.6em;
+}
+
+/* .like {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  color: var(--secondary-color);
+  cursor: pointer;
+} */
+
+.like,
+.close {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  /* padding: 8px; */
+}
+
+.like span {
+  margin-left: 4px;
+}
+
+.created-at {
+  font-size: 25px;
+  color: var(--secondary-color);
 }
 
 .form,
@@ -215,7 +252,6 @@ h3 {
   font-weight: 700;
   cursor: pointer;
   text-align: center;
-  appearance: button;
   display: flex;
   align-items: center;
   justify-content: center;

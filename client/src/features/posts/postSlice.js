@@ -3,7 +3,7 @@ import postService from "./postService";
 
 const initialState = {
   posts: [],
-  post: {},
+  // post: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -84,6 +84,25 @@ export const deletePost = createAsyncThunk(
   }
 );
 
+// Like a post
+export const likePost = createAsyncThunk(
+  "posts/likePost",
+  async (postId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await postService.likePost(postId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const postSlice = createSlice({
   name: "posts",
   initialState,
@@ -128,6 +147,20 @@ export const postSlice = createSlice({
       })
       .addCase(deletePost.rejected, (state, action) => {
         state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(likePost.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(likePost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.posts = state.posts.map((post) =>
+          post._id === action.payload._id ? action.payload : post
+        );
+      })
+      .addCase(likePost.rejected, (state, action) => {
         state.isError = true;
         state.message = action.payload;
       });

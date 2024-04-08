@@ -3,7 +3,7 @@ const Post = require("../models/postModel");
 const asyncHandler = require("express-async-handler");
 
 // @desc    Like a post
-// @route   POST /api/likes/:postId
+// @route   Put /api/posts/likes/:postId
 // @access  Private
 const likePost = asyncHandler(async (req, res) => {
   const { postId } = req.params;
@@ -18,7 +18,7 @@ const likePost = asyncHandler(async (req, res) => {
 
   // Check if the user has already liked the post
   const alreadyLiked = await Like.findOne({
-    username: req.user._id,
+    user: req.user._id,
     post: postId,
   });
 
@@ -37,7 +37,7 @@ const likePost = asyncHandler(async (req, res) => {
 });
 
 // @desc    Unlike a post
-// @route   DELETE /api/likes/:postId
+// @route   DELETE /api/posts/likes/:postId
 // @access  Private
 const unlikePost = asyncHandler(async (req, res) => {
   const { postId } = req.params;
