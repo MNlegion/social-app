@@ -2,8 +2,8 @@ import React from "react";
 import { FaTrash, FaHeart } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deletePost } from "../../features/posts/postSlice";
-import { likePost } from "../../features/posts/postSlice";
+import { deletePost, likePost } from "../../features/posts/postSlice";
+
 
 function PostItem({ post }) {
   const loggedInUserId = useSelector((state) => state.auth.user._id);
@@ -15,6 +15,7 @@ function PostItem({ post }) {
   // Delete post
   const handleDelete = () => {
     dispatch(deletePost(post._id));
+    return;
   };
 
   // Like post
@@ -22,9 +23,9 @@ function PostItem({ post }) {
     if (!loggedInUserId) {
       navigate("/login");
       return;
+    } else {
+      dispatch(likePost(post._id));
     }
-
-    dispatch(likePost(post._id));
   };
 
   return (

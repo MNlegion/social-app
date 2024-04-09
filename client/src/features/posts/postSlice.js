@@ -30,22 +30,22 @@ export const createPost = createAsyncThunk(
 );
 
 // Get all posts
-// export const getPosts = createAsyncThunk(
-//   "posts/getPosts",
-//   async (_, thunkAPI) => {
-//     try {
-//       return await postService.getPosts();
-//     } catch (error) {
-//       const message =
-//         (error.response &&
-//           error.response.data &&
-//           error.response.data.message) ||
-//         error.message ||
-//         error.toString();
-//       return thunkAPI.rejectWithValue(message);
-//     }
-//   }
-// );
+export const getPosts = createAsyncThunk(
+  "posts/getPosts",
+  async (_, thunkAPI) => {
+    try {
+      return await postService.getPosts();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // Get all Single User's posts
 export const getUserPosts = createAsyncThunk(
