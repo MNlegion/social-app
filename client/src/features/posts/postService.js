@@ -48,8 +48,11 @@ const likePost = async (postId, token) => {
   };
 
   const response = await axios.put(`${API_URL}likes/${postId}`, postId, config);
+  if(response.data){
+    return postId;
+  }
 
-  return response.data;
+  return postId;
 }
 
 // export default postService;
