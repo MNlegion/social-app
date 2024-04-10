@@ -33,10 +33,12 @@ const userSchema = new mongoose.Schema(
     bio: {
       type: String,
       required: false,
+      default: "",
     },
     website: {
       type: String,
       required: false,
+      default: "",
     },
     followers: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],

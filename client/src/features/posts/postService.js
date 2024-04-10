@@ -52,7 +52,7 @@ const likePost = async (postId, token) => {
     return postId;
   }
 
-  return postId;
+  return response.data;
 }
 
 // export default postService;

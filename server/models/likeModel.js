@@ -12,6 +12,10 @@ const likeSchema = new mongoose.Schema(
       ref: "Post",
       required: true,
     },
+    username: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true,
     versionKey: false,

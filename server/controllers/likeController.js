@@ -28,7 +28,7 @@ const likePost = asyncHandler(async (req, res) => {
   }
 
   // Create the like relationship
-  const like = await Like.create({ user: req.user._id, post: postId });
+  const like = await Like.create({ user: req.user._id, username: req.user.username, post: postId });
 
   // Update the corresponding Post document to include the like
   await Post.findByIdAndUpdate(postId, { $push: { likes: like._id } });
