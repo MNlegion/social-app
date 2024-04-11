@@ -45,7 +45,7 @@ h3 {
 
 .container {
   width: 100%;
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
@@ -207,9 +207,13 @@ h3 {
   color: var(--secondary-color);
 }
 
-.form,
+.form {
+  width: 60%;
+  margin: 0 auto;
+}
+
 .content {
-  width: 70%;
+  width: 85%;
   margin: 0 auto;
 }
 
