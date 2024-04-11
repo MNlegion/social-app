@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import PostPage from "./components/Posts/PostPage";
 import SavedPostsPage from "./components/SavedPosts/SavedPostsPage";
 import FollowersPage from "./components/Followers/FollowersPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/savedposts" element={<SavedPostsPage />} />
             <Route path="/followers" element={<FollowersPage />} />
           </Routes>
+          <Footer />
         </div>
       </Router>
       <ToastContainer />

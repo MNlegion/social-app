@@ -98,6 +98,17 @@ h3 {
   color: #828282;
 }
 
+.footer {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 20px 0 20px 0;
+  margin: auto;
+  margin-top: 60px;
+  width: 60%;
+  position: relative;
+  border-radius: 5px;
+}
+
 /* Category Card Styling */
 .category-cards {
   margin: 20px;
