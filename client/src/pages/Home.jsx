@@ -10,6 +10,8 @@ function Home() {
     <section className='content'>
       <p>Welcome to the home page</p>
     </section>
+
+
     </>
   )
 }
