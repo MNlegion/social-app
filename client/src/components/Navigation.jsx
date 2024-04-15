@@ -1,26 +1,32 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Navigation() {
-    return (
-        <>
-        <nav className="navigation">
-          <ul>
-            <li>
-              <a href="/">Home</a>
-            </li>
-            <li>
-              <a href="/dashboard">Dashboard</a>
-            </li>
-            <li>
-              <a href="/login">Login</a>
-            </li>
-            <li>
-              <a href="/register">Register</a>
-            </li>
-          </ul>
-        </nav>
-        </>
-      )
-}
+const Navigation = () => {
+  return (
+    <nav className="dashboard-nav">
+      <ul>
+        <li>
+          <Link to="/posts">Posts</Link>
+        </li>
+        <li>
+          <Link to="/savedposts">Saved Posts</Link>
+        </li>
+        <li>
+          <Link to="/followers">Followers</Link>
+        </li>
+        <li>
+          <Link to="/dashboard/test">test</Link>
+        </li>
+        <li>
+          <Link to="/dashboard/test">test</Link>
+        </li>
+        <li>
+          <Link to="/dashboard/test">test</Link>
+        </li>
+        {/* Add more navigation links as needed */}
+      </ul>
+    </nav>
+  );
+};
 
-export default Navigation
+export default Navigation;

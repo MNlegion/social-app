@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import PostForm from "./PostForm";
 import PostItem from "./PostItem";
+import Navigation from "../Navigation";
 import { getUserPosts, reset } from "../../features/posts/postSlice";
 
 function PostPage() {
@@ -27,6 +28,7 @@ function PostPage() {
 
   return (
     <>
+      <Navigation />
       <section className="heading">
         <h1>{user.username}'s Post Page</h1>
       </section>
