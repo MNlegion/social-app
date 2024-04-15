@@ -6,22 +6,22 @@ const Navigation = () => {
     <nav className="dashboard-nav">
       <ul>
         <li>
-          <Link to="/posts">Posts</Link>
+          <Link to="/posts" className='nav-tab'>Posts</Link>
         </li>
         <li>
-          <Link to="/savedposts">Saved Posts</Link>
+          <Link to="/savedposts" className='nav-tab'>Saved Posts</Link>
         </li>
         <li>
-          <Link to="/followers">Followers</Link>
+          <Link to="/followers" className='nav-tab'>Followers</Link>
         </li>
         <li>
-          <Link to="/dashboard/test">test</Link>
+          <Link to="/dashboard/test" className='nav-tab'>test</Link>
         </li>
         <li>
-          <Link to="/dashboard/test">test</Link>
+          <Link to="/dashboard/test" className='nav-tab'>test</Link>
         </li>
         <li>
-          <Link to="/dashboard/test">test</Link>
+          <Link to="/dashboard/test" className='nav-tab'>test</Link>
         </li>
         {/* Add more navigation links as needed */}
       </ul>
