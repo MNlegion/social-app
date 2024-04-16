@@ -12,11 +12,11 @@ function Home() {
     </section>
 
     <div className="home-container">
-      <section>
+      <section className='home-section'>
         <h2>Section 1</h2>
         <p>Content for section 1</p>
       </section>
-      <section>
+      <section className='home-section'>
         <h2>Section 2</h2>
         <p>Content for section 2</p>
       </section>
