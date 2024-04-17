@@ -49,6 +49,16 @@ h3 {
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 10px;
 }
 
 .header {
@@ -138,12 +148,12 @@ h3 {
 .footer {
   background-color: var(--primary-color);
   color: #fff;
-  padding: 20px 0 20px 0;
   margin: auto;
-  margin-top: 200px;
+  padding: 20px;
   width: 60%;
-  position: relative;
   border-radius: 5px;
+  align-self: flex-end;
+  bottom: 0;
 }
 
 .footer p {

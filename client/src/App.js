@@ -16,17 +16,19 @@ function App() {
     <>
       <Router>
         <div className="container">
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/posts" element={<PostPage />} />
-            <Route path="/savedposts" element={<SavedPostsPage />} />
-            <Route path="/followers" element={<FollowersPage />} />
-          </Routes>
-          <Footer />
+          <div className="content">
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/posts" element={<PostPage />} />
+              <Route path="/savedposts" element={<SavedPostsPage />} />
+              <Route path="/followers" element={<FollowersPage />} />
+            </Routes>
+            <Footer />
+          </div>
         </div>
       </Router>
       <ToastContainer />
