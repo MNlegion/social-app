@@ -32,6 +32,9 @@ function PostItem({ post }) {
     <div className="post-item">
       <h3>{post.title}</h3>
       <p>{post.content}</p>
+      {post.image && (
+        <img src={post.image} alt="User Post" style={{ maxWidth: "100%" }} />
+      )}
       <div className="info">
         <button className="like" onClick={handleLike}>
           <FaHeart style={{ color: "#ff0000" }} />

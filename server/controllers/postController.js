@@ -17,6 +17,9 @@ const createPost = async (req, res) => {
     content: req.body.content,
     user: req.user._id,
     username: req.user.username,
+
+    // check if an image was uploaded
+    image: req.file ? req.file.path : "",
   });
 
   console.log(req.user)
