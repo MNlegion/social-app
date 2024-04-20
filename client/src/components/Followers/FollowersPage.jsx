@@ -1,8 +1,14 @@
 import React from 'react'
+import Navigation from '../Navigation'
 
 function FollowersPage() {
   return (
-    <div>Who's following you!</div>
+    <>
+      <Navigation />
+      <section className="heading">
+        <h1>Followers Page</h1>
+      </section>
+    </>
   )
 }
 
