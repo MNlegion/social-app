@@ -2,7 +2,7 @@ import React from 'react'
 
 function FollowersPage() {
   return (
-    <div>FollowersPage</div>
+    <div>Who's following you!</div>
   )
 }
 
