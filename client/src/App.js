@@ -26,6 +26,9 @@ function App() {
               <Route path="/posts" element={<PostPage />} />
               <Route path="/savedposts" element={<SavedPostsPage />} />
               <Route path="/followers" element={<FollowersPage />} />
+              <Route path="/test" element={<TestPage />} />
+              <Route path="/test1" element={<TestPage1 />} />
+              <Route path="/test2" element={<TestPage2 />} />
             </Routes>
             <Footer />
           </div>
