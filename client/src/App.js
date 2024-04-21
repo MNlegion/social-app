@@ -10,6 +10,9 @@ import PostPage from "./components/Posts/PostPage";
 import SavedPostsPage from "./components/SavedPosts/SavedPostsPage";
 import FollowersPage from "./components/Followers/FollowersPage";
 import Footer from "./components/Footer";
+import TestPage from "./components/TestPage/TestPage";
+import TestPage1 from "./components/TestPage1/TestPage1";
+import TestPage2 from "./components/TestPage2/TestPage2";
 
 function App() {
   return (

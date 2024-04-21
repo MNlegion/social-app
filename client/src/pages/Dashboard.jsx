@@ -92,13 +92,13 @@ function Dashboard() {
         </Link>
         {/* Add more category cards for other actions */}
         <Link to="/test1" className="category-card">
-          <h2>Test</h2>
-          <p>Test</p>
+          <h2>Test1</h2>
+          <p>Test1</p>
         </Link>
         {/* Add more category cards for other actions */}
         <Link to="/test2" className="category-card">
-          <h2>Test</h2>
-          <p>Test</p>
+          <h2>Test2</h2>
+          <p>Test2</p>
         </Link>
       </div>
     </>
