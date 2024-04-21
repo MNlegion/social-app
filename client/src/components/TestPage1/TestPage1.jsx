@@ -1,15 +1,15 @@
 import React from 'react'
 import Navigation from '../Navigation'
 
-function TestPage() {
+function TestPage1() {
   return (
     <>
         <Navigation />
         <section className="heading">
-            <h1>Test Page</h1>
+            <h1>Test Page 1</h1>
         </section>
     </>
   )
 }
 
-export default TestPage
+export default TestPage1
