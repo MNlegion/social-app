@@ -5,3 +5,4 @@
 ## Footer component started, will need CSS too
 ## Need to work on implementing comments on posts next
 ## Brought in navigation into all pages
+## Multer implementation for image collection
