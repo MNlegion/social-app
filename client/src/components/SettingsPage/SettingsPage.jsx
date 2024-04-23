@@ -1,7 +1,7 @@
 import React from "react";
 import Navigation from "../Navigation";
 
-function TestPage() {
+function SettingsPage() {
   return (
     <>
       <Navigation />
@@ -12,4 +12,4 @@ function TestPage() {
   );
 }
 
-export default TestPage;
+export default SettingsPage;

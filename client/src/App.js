@@ -10,7 +10,7 @@ import PostPage from "./components/Posts/PostPage";
 import SavedPostsPage from "./components/SavedPosts/SavedPostsPage";
 import FollowersPage from "./components/Followers/FollowersPage";
 import Footer from "./components/Footer";
-import TestPage from "./components/TestPage/TestPage";
+import SettingsPage from "./components/SettingsPage/SettingsPage";
 import TestPage1 from "./components/TestPage1/TestPage1";
 import TestPage2 from "./components/TestPage2/TestPage2";
 
@@ -29,7 +29,7 @@ function App() {
               <Route path="/posts" element={<PostPage />} />
               <Route path="/savedposts" element={<SavedPostsPage />} />
               <Route path="/followers" element={<FollowersPage />} />
-              <Route path="/test" element={<TestPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
               <Route path="/test1" element={<TestPage1 />} />
               <Route path="/test2" element={<TestPage2 />} />
             </Routes>
