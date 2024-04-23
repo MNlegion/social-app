@@ -15,13 +15,13 @@ const Navigation = () => {
           <Link to="/followers" className='nav-tab'>Followers</Link>
         </li>
         <li>
-          <Link to="/test" className='nav-tab'>test</Link>
-        </li>
-        <li>
           <Link to="/test1" className='nav-tab'>test1</Link>
         </li>
         <li>
           <Link to="/test2" className='nav-tab'>test2</Link>
+        </li>
+        <li>
+          <Link to="/settings" className='nav-tab'>Settings</Link>
         </li>
         {/* Add more navigation links as needed */}
       </ul>
