@@ -1,31 +1,35 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { updateUserProfile } from "../../features/auth/authSlice";
 
 function SettingsForm() {
-    const [formData, setFormData] = useState({
-        username: "",
-        email: "",
-        newPassword: "",
-        confirmPassword: "",
-        darkMode: false,
-    });
+    const user = useSelector((state) => state.auth.user);
+    const dispatch = useDispatch();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-      };
-    
-      const handleToggleDarkMode = () => {
-        setFormData({ ...formData, darkMode: !formData.darkMode });
-      };
-    
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        // Dispatch an action to update user information
-        dispatch(updateUserProfile(formData));
-      };
+  const [formData, setFormData] = useState({
+    username: user.username,
+    email: user.email,
+    newPassword: "",
+    confirmPassword: "",
+    darkMode: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleToggleDarkMode = () => {
+    setFormData({ ...formData, darkMode: !formData.darkMode });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Dispatch an action to update user information
+    dispatch(updateUserProfile(formData));
+  };
 
   return (
     <>
