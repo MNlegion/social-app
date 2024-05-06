@@ -6,7 +6,7 @@ function TestPage2() {
     <>
       <Navigation />
       <section className="heading">
-        <h1>Test Page 2</h1>
+        <h1>Coming Soon!</h1>
       </section>
     </>
   );
