@@ -7,4 +7,3 @@
 ## Tailwind and user updates within settings
 ## Brought in navigation into all pages
 ## Multer implementation for image collection
-## Continued work on User Settings page
