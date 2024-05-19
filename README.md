@@ -7,3 +7,4 @@
 ## Tailwind and user updates within settings
 ## Brought in navigation into all pages
 ## Multer implementation for image collection
+## Updates coming week of 5/20
