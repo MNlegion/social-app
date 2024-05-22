@@ -8,3 +8,4 @@
 ## Brought in navigation into all pages
 ## Multer implementation for image collection
 ## Updates coming week of 5/21/2024
+## Searching for inspiration
